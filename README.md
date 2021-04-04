@@ -7,13 +7,13 @@ dependencies: [
 ```
 Usage:
 ```
-import libtdjson
+import tdjson
 ```
 > Sample of code can be found [in official tdlib repo](https://github.com/tdlib/td/blob/master/example/swift/src/main.swift)
 # Building
-Below are instructions for building `tdlibjson.xcframework`.
+Below are instructions for building `tdjson.xcframework`.
 
-To compile `tdlibjson` you will need to:
+To compile `tdjson` you will need to:
 * Install the latest Xcode via `xcode-select --install` or downloading it from [Xcode website](https://developer.apple.com/xcode/).
   It is not enough to install only command line developer tools to build `TDLib` for iOS.
 * Install other build dependencies using [Homebrew](https://brew.sh):
