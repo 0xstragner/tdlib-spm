@@ -25,7 +25,7 @@ cd $ROOT
 ./xcbuild.sh
 
 cd $TDLIB/example/ios/build
-LIBNAME=libtdjson
+LIBNAME=tdjson
 
 XCFRAMEWORK_BUILD_PATH=$ROOT/build
 
@@ -44,9 +44,6 @@ do
 
     cd $PLATFORM
 
-    lipo -create $LIBNAME.dylib -output $LIBNAME
-    install_name_tool -id @rpath/$LIBNAME.framework/$LIBNAME $LIBNAME
-
     ARCHS=$(lipo -archs $LIBNAME)
     for ARCH in $ARCHS;
     do
@@ -57,7 +54,7 @@ do
     then
         mkdir $DEVICE_PATH
 
-        DEVICE_ARCHS="$LIBNAME-x86_64"
+        DEVICE_ARCHS="$LIBNAME"
         DEVICE_FRAMEWORK_PATH=$DEVICE_PATH/$LIBNAME.framework
         mkdir $DEVICE_FRAMEWORK_PATH
 

@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "libtdjson",
+    name: "tdjson",
     platforms: [
         .iOS(.v10), 
         .macOS(.v10_14), 
@@ -13,15 +13,15 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "libtdjson", 
-            targets: ["libtdjson"]
+            name: "tdjson", 
+            targets: ["tdjson"]
         )
     ],
     targets: [
         .binaryTarget(
-            name: "libtdjson",
-            url: "https://github.com/oboupo/tdlib-spm/releases/download/v1.7.0/libtdjson.xcframework.zip",
-            checksum: "25d3fef1a2c7d060cc07f2c4f543d388cd5ff056a0f7a3ddc5e4f0497ed8b5ca"
+            name: "tdjson",
+            url: "https://github.com/oboupo/tdlib-spm/releases/download/v1.7.0/tdjson.xcframework.zip",
+            checksum: "993981a37046b81b432b146ecb1f94d14ea64a913979dc691e9d301a82e72597"
         )
     ]
 )

@@ -1,0 +1,25 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a243439..5e1e09d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -774,6 +774,12 @@ target_include_directories(tdjson PUBLIC
+   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
+ if (APPLE)
+   set_target_properties(tdjson PROPERTIES LINK_FLAGS "-Wl,-exported_symbols_list,${CMAKE_CURRENT_SOURCE_DIR}/tdclientjson_export_list")
++  set_target_properties(tdjson PROPERTIES
++    BUILD_WITH_INSTALL_RPATH 1
++    XCODE_ATTRIBUTE_LD_DYLIB_INSTALL_NAME "@rpath/tdjson.framework/tdjson"
++    INSTALL_NAME_DIR "@rpath"
++    FRAMEWORK TRUE
++  )
+ endif()
+ 
+ add_library(tdjson_static STATIC ${TD_JSON_SOURCE} ${TD_JSON_HEADERS})
+@@ -842,6 +848,7 @@ install(TARGETS tdjson TdJson tdjson_static TdJsonStatic tdjson_private tdclient
+   ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+   RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+   INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
++  FRAMEWORK DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+ )
+ 
+ # generate pkg-config files

@@ -5,6 +5,10 @@
 #
 
 td_path=$PWD/sources
+
+cd $td_path
+git apply ../cmake_framework.patch
+
 cd $td_path/example/ios
 
 rm -rf build
@@ -37,8 +41,7 @@ do
     make -j3 install || exit
     cd ..
     mkdir -p $platform
-    cp $build/libtdjson.dylib $platform/libtdjson.dylib
-    install_name_tool -id @rpath/libtdjson.dylib $platform/libtdjson.dylib
+    cp $install/lib/tdjson.framework/Versions/A/tdjson $platform/tdjson
   else
     simulators="0 1"
     for simulator in $simulators;
@@ -72,15 +75,14 @@ do
       make -j3 install || exit
       cd ..
     done
-    lib="install-${platform}/lib/libtdjson.dylib"
-    lib_simulator="install-${platform}-simulator/lib/libtdjson.dylib"
+    lib="install-${platform}/lib/tdjson.framework/tdjson"
+    lib_simulator="install-${platform}-simulator/lib/tdjson.framework/tdjson"
     mkdir -p $platform
-    lipo -create $lib $lib_simulator -o $platform/libtdjson.dylib
-    install_name_tool -id @rpath/libtdjson.dylib $platform/libtdjson.dylib
+    lipo -create $lib $lib_simulator -o $platform/tdjson
   fi
 
   mkdir -p ../tdjson/$platform/include
   rsync --recursive ${install}/include/ ../tdjson/${platform}/include/
   mkdir -p ../tdjson/$platform/lib
-  cp $platform/libtdjson.dylib ../tdjson/$platform/lib/
+  cp $platform/tdjson ../tdjson/$platform/lib/
 done
