@@ -60,7 +60,8 @@ do
       fi
       if [[ $platform = "watchOS" ]]; then
         ios_platform="WATCH${ios_platform}"
-        ios_deloyment_target="5.0"
+        ios_deloyment_target="6.0"
+        options="$options -DTD_EXPERIMENTAL_WATCH_OS=ON"
       fi
       if [[ $platform = "tvOS" ]]; then
         ios_platform="TV${ios_platform}"

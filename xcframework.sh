@@ -3,13 +3,16 @@
 ROOT=$PWD
 
 TDLIB_VERSION=1.7.0
+
+TDLIB_VERSION_BRANCH="${TDLIB_BRANCH:-v$TDLIB_VERSION}"
+
 TDLIB=$ROOT/sources
 
 TDLIB_MODULEMAP=$ROOT/templates/modulemap
 TDLIB_INFO=$ROOT/templates/info
 
 rm -rf $TDLIB
-git clone --depth 1 --branch v$TDLIB_VERSION git@github.com:tdlib/td.git $TDLIB
+git clone --depth 1 --branch $TDLIB_VERSION_BRANCH git@github.com:tdlib/td.git $TDLIB
 
 cd $TDLIB
 mkdir native-build
@@ -72,8 +75,8 @@ do
             DEVICE_ARCHS="$LIBNAME-arm64 $LIBNAME-armv7 $LIBNAME-armv7s"
         elif [[ $PLATFORM = "watchOS" ]];
         then
-            SIMULATOR_ARCHS="$LIBNAME-i386"
-            DEVICE_ARCHS="$LIBNAME-armv7k"
+            SIMULATOR_ARCHS="$LIBNAME-i386 $LIBNAME-x86_64"
+            DEVICE_ARCHS="$LIBNAME-armv7k $LIBNAME-arm64_32"
         elif [[ $PLATFORM = "tvOS" ]];
         then
             SIMULATOR_ARCHS="$LIBNAME-x86_64"
